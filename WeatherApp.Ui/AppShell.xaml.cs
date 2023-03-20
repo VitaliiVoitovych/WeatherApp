@@ -6,6 +6,9 @@
         {
             InitializeComponent();
             BindingContext = this;
+
+            if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+                CurrentItem = PhoneTabs;
         }
 
         private string selectedRoute;

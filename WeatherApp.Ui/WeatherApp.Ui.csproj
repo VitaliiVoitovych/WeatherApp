@@ -12,14 +12,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>WeatherApp.Ui</ApplicationTitle>
+		<ApplicationTitle>WeatherApp</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.weatherapp.ui</ApplicationId>
 		<ApplicationIdGuid>5a2928fe-eab5-4779-8e2c-f9c6f45c8f7d</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>0.1</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -32,11 +32,11 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-
-		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
-
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#1B2334" />
+		
+    <!-- Splash Screen -->
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#1B2334" />
+    
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 
@@ -48,12 +48,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\heart.png" />
-	  <None Remove="Resources\Images\home.png" />
-	  <None Remove="Resources\Images\setting.png" />
+	  <None Remove="Resources\AppIcon\appicon.svg" />
+	  <None Remove="Resources\Images\heart.svg" />
+	  <None Remove="Resources\Images\home.svg" />
+	  <None Remove="Resources\Images\setting.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiIcon Include="Resources\AppIcon\appicon.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 

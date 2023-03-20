@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:WeatherApp.Ui"
     xmlns:pages="clr-namespace:WeatherApp.Ui.Pages"
     FlyoutWidth="104"
-    FlyoutBehavior="Locked">
+    FlyoutBehavior="{OnIdiom Phone=Disabled, Desktop=Locked}">
 
     <Shell.Resources>
         <ControlTemplate x:Key="MenuItemTemplate">
@@ -97,6 +97,7 @@
 
         </DataTemplate>
     </Shell.FlyoutContentTemplate>
+    <!-- Desktop -->
     <FlyoutItem Title="Home" Route="home">
         <ShellContent ContentTemplate="{DataTemplate pages:HomePage}"/>
     </FlyoutItem>
@@ -106,4 +107,17 @@
     <FlyoutItem Title="Settings" Route="settings">
         <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"/>
     </FlyoutItem>
+    
+    <!-- Phone -->
+    <TabBar x:Name="PhoneTabs">
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:HomePage}"/>
+        </Tab>
+        <Tab Title="Favourites" Icon="heart.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:FavouritesPage}"/>
+        </Tab>
+        <Tab Title="Settings" Icon="setting.png">
+            <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"/>
+        </Tab>
+    </TabBar>
 </Shell>
