@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:WeatherApp.Ui"
     xmlns:pages="clr-namespace:WeatherApp.Ui.Pages"
+    FlyoutBackgroundColor="{StaticResource Dark}"
     FlyoutWidth="104"
     FlyoutBehavior="{OnIdiom Phone=Disabled, Desktop=Locked}">
 
@@ -16,7 +17,7 @@
                         <VisualStateGroup x:Name="CheckedStates">
                             <VisualState x:Name="Checked">
                                 <VisualState.Setters>
-                                    <Setter TargetName="OuterBorder" Property="Background" Value="{StaticResource Gray900Brush}" />
+                                    <Setter TargetName="OuterBorder" Property="Background" Value="{StaticResource DarkBrush}" />
                                 </VisualState.Setters>
                             </VisualState>
 
@@ -56,7 +57,7 @@
     <Shell.FlyoutContentTemplate>
         <DataTemplate>
             <Grid
-                Background="{StaticResource Tertiary}"
+                Background="{StaticResource Secondary}"
                 RowDefinitions="*,*,*,*,*,*,*,*"
                 RadioButtonGroup.GroupName="Menu"
                 RadioButtonGroup.SelectedValue="{Binding SelectedRoute}">
