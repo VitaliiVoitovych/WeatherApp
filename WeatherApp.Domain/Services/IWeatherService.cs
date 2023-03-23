@@ -9,5 +9,5 @@ namespace WeatherApp.Domain.Services;
 
 public interface IWeatherService
 {
-    Task<Weather?> GetWeatherASync(string city);
+    Task<Weather?> GetWeatherAsync(string city);
 }

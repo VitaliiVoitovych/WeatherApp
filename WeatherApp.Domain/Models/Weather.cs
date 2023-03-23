@@ -37,5 +37,6 @@ public class Current
 public class Condition
 {
     public required string Text { get; set; }
-    public required string Icon { get; set; }
+    [JsonPropertyName("code")]
+    public int IconCode { get; set; }
 }
