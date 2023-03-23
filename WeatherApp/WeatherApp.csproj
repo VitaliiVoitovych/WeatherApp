@@ -19,7 +19,7 @@
 		<ApplicationIdGuid>3bac5199-76bd-46e3-acc6-f0b55378267b</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>0.1</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>0.2</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -39,6 +39,7 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
+    <MauiImage Include="Resources\Images\WeatherIcon\*" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -54,7 +55,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>

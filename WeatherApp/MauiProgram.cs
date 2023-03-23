@@ -20,12 +20,13 @@ namespace WeatherApp
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+            //builder.Services.AddSingleton<IWeatherService, WeatherService>();
 
-            builder.Services.AddTransient<HomeViewModel>();
+            builder.Services.AddSingleton<HomeViewModel>();
             builder.Services.AddTransient<FavouritesViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
 
-            builder.Services.AddTransient<HomePage>();
+            builder.Services.AddSingleton<HomePage>();
             builder.Services.AddTransient<FavouritesPage>();
             builder.Services.AddTransient<SettingsPage>();
 

@@ -27,6 +27,8 @@ public class Current
     [JsonPropertyName("precip_mm")]
     public double Precipitation { get; set; }
 
+    [JsonPropertyName("is_day")]
+    public int IsDay { get; set; }
     public int Humidity { get; set; }
 
     public int Cloud { get; set; }
