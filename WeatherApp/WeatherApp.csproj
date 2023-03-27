@@ -52,6 +52,8 @@
 	  <None Remove="Resources\Images\heart.svg" />
 	  <None Remove="Resources\Images\home.svg" />
 	  <None Remove="Resources\Images\setting.svg" />
+	  <None Remove="Resources\Images\up_arrow.svg" />
+	  <None Remove="Resources\Images\wind_direction.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
