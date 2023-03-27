@@ -2,7 +2,7 @@
 
 namespace WeatherApp.Domain.Models;
 
-public class Weather
+public class CurrentWeather
 {
     public required Location Location { get; set; }
 

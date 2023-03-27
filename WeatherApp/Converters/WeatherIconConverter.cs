@@ -12,9 +12,18 @@ public class WeatherIconConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        var weather = (Current)value;
-        var isDay = weather.IsDay;
-        return isDay == 1 ? $"day{weather.Condition.IconCode}.png" : $"night{weather.Condition.IconCode}.png";
+        // TODO: Rewrite
+        if (value is Current current)
+        {
+            var isDay = current.IsDay;
+            return isDay == 1 ? $"day{current.Condition.IconCode}.png" : $"night{current.Condition.IconCode}.png";
+        }
+        else if (value is Hour hour)
+        {
+            var isDay = hour.IsDay;
+            return isDay == 1 ? $"day{hour.Condition.IconCode}.png" : $"night{hour.Condition.IconCode}.png";
+        }
+        return $"day1000.png";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

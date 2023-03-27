@@ -2,36 +2,155 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:WeatherApp.ViewModels"
+             xmlns:models="clr-namespace:WeatherApp.Domain.Models;assembly=WeatherApp.Domain"
              x:Class="WeatherApp.Pages.HomePage"
              x:DataType="viewModels:HomeViewModel">
-    <VerticalStackLayout
-        HorizontalOptions="Center">
-        <HorizontalStackLayout
-            HorizontalOptions="Center">
-            <Label
-                Text="{Binding Weather.Location.Name}"
-                TextColor="{StaticResource Light}"
-                FontSize="32"
-                FontAttributes="Bold"/>
-        </HorizontalStackLayout>
-        <Image
-            Source="{Binding Weather.Current, Converter={StaticResource WeatherIconConverter}}"
-            HeightRequest="200"
-            WidthRequest="200"/>
-
+    <Grid RowDefinitions="50,*">
         <Label
-            Text="{Binding Weather.Current.Condition.Text}"
-            HorizontalTextAlignment="Center"
-            FontSize="24"
-            TextColor="{StaticResource Light}"/>
+            Text="{Binding CurrentWeather.Location.Name}"
+            TextColor="{StaticResource Light}"
+            FontSize="32"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"/>
 
-        <Label
-            Text="{Binding Weather.Current.Temp, StringFormat='Temperature: {0:F0}°C'}"
-            FontSize="24"
-            TextColor="{StaticResource Light}"/>
-        <Button 
-            Text="TestButton"
-            Background="{StaticResource SecondaryBrush}"
-            Command="{Binding TestCommand}"/>
-    </VerticalStackLayout>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout>
+
+                <!-- Current Weather -->
+                <Image
+                    Source="{Binding CurrentWeather.Current, Converter={StaticResource WeatherIconConverter}}"
+                    HeightRequest="200"
+                    WidthRequest="200"/>
+
+                <Label
+                    Text="{Binding CurrentWeather.Current.Condition.Text}"
+                    HorizontalTextAlignment="Center"
+                    FontSize="24"
+                    TextColor="{StaticResource Light}"/>
+
+                <Label
+                    Text="{Binding CurrentWeather.Current.Temp, StringFormat='Temperature: {0:F0}°C'}"
+                    FontSize="24"
+                    TextColor="{StaticResource Light}"
+                    HorizontalTextAlignment="Center"/>
+
+                <!-- 24 Hours -->
+                <Label
+                    Text="Next 24 Hours"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource Accent}"
+                    Margin="0,12,0,0"/>
+
+                <ScrollView
+                    Orientation="Horizontal"
+                    Margin="0,20,0,0">
+
+                    <CollectionView
+                        ItemsSource="{Binding Hours}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout
+                                Orientation="Horizontal"
+                                ItemSpacing="20"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Hour">
+                                <VerticalStackLayout
+                                    HorizontalOptions="Center"
+                                    Margin="0,0,0,15">
+
+                                    <Label
+                                        Text="{Binding Time, StringFormat='{0:HH:mm}'}"
+                                        TextColor="{StaticResource Light}"
+                                        HorizontalTextAlignment="Center"/>
+
+                                    <Image
+                                        Source="{Binding ., Converter={StaticResource WeatherIconConverter}}"
+                                        WidthRequest="48"
+                                        HeightRequest="48"/>
+
+                                    <Label 
+                                        Text="{Binding Temp, StringFormat='{0:F0}°C'}"
+                                        TextColor="{StaticResource Light}"
+                                        HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+
+                <!-- Daily forecast -->
+                <Label
+                    Text="Daily Forecast"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource Accent}"
+                    Margin="0,12,0,0"/>
+
+                <ScrollView
+                    Orientation="Horizontal"
+                    Margin="0,20,0,0">
+
+                    <CollectionView
+                        ItemsSource="{Binding Days}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout
+                                Orientation="Horizontal"
+                                ItemSpacing="20"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:ForecastDay">
+                                <Frame
+                                    Background="{StaticResource SecondaryBrush}"
+                                    CornerRadius="12"
+                                    Padding="15"
+                                    Margin="0,0,0,15">
+                                    <VerticalStackLayout>
+                                        <HorizontalStackLayout
+                                            VerticalOptions="Center">
+                                            <Image
+                                                Source="{Binding Day.Condition.IconCode, StringFormat='day{0}.png'}"
+                                                WidthRequest="64"
+                                                HeightRequest="64"
+                                                Margin="0,0,22,0"/>
+
+                                            <VerticalStackLayout>
+                                                <Label
+                                                    Text="{Binding Date}"
+                                                    FontSize="24"
+                                                    FontAttributes="Bold"
+                                                    VerticalTextAlignment="Center"/>
+
+                                                <Label
+                                                    Text="{Binding Day.Condition.Text}"
+                                                    FontSize="18"/>
+                                            </VerticalStackLayout>
+                                        </HorizontalStackLayout>
+
+                                        <Grid ColumnDefinitions="*,*">
+                                            <VerticalStackLayout>
+                                                <Label
+                                                    Text="Temperature"/>
+                                                <Label
+                                                    Text="{Binding Day.MaxTemp, StringFormat='Max : {0:F0}°C'}"/>
+                                                <Label
+                                                    Text="{Binding Day.MinTemp, StringFormat='Min : {0:F0}°C'}"/>
+                                            </VerticalStackLayout>
+                                            <VerticalStackLayout Grid.Column="1">
+                                                <Label
+                                                    Text="{Binding Day.MaxWind ,StringFormat='{0} km/h'}"/>
+                                                <Label
+                                                    Text="{Binding Day.ChanceOfRain ,StringFormat='{0}%'}"/>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

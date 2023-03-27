@@ -24,4 +24,15 @@
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Background" Value="{StaticResource DarkBrush}"/>
     </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Light}"/>
+    </Style>
+
+    <Style TargetType="ScrollView">
+        <Setter Property="HorizontalScrollBarVisibility"
+                Value="{OnIdiom Desktop=Default, Phone=Never}"/>
+        <Setter Property="VerticalScrollBarVisibility"
+                Value="Never"/>
+    </Style>
 </ResourceDictionary>

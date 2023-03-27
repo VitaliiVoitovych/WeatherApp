@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using WeatherApp.Pages;
+using WeatherApp.Services;
 using WeatherApp.ViewModels;
 
 namespace WeatherApp
@@ -20,13 +21,13 @@ namespace WeatherApp
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-            //builder.Services.AddSingleton<IWeatherService, WeatherService>();
+            builder.Services.AddSingleton<IWeatherService, WeatherService>();
 
-            builder.Services.AddSingleton<HomeViewModel>();
+            builder.Services.AddTransient<HomeViewModel>();
             builder.Services.AddTransient<FavouritesViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
 
-            builder.Services.AddSingleton<HomePage>();
+            builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<FavouritesPage>();
             builder.Services.AddTransient<SettingsPage>();
 
