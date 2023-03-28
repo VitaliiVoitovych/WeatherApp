@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:WeatherApp.ViewModels"
              xmlns:models="clr-namespace:WeatherApp.Domain.Models;assembly=WeatherApp.Domain"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="WeatherApp.Pages.HomePage"
              x:DataType="viewModels:HomeViewModel">
     <Grid RowDefinitions="50,*">
@@ -48,7 +49,8 @@
                         Margin="0,20,0,0"
                         HorizontalOptions="End">
                         <VerticalStackLayout
-                            VerticalOptions="Center">
+                            VerticalOptions="Center"
+                            Margin="0,0,20,0">
                             <Label
                                 Text="{Binding CurrentWeather.Current.Feelslike,
                                     StringFormat='Feelslike: {0:F0}°C'}"/>
@@ -61,6 +63,12 @@
                             <Label
                                 Text="{Binding CurrentWeather.Current.Cloud,
                                     StringFormat='Cloud cover: {0} %'}"/>
+                            <Label
+                                Text="{Binding CurrentWeather.Current.WindDirection, 
+                                    StringFormat='Wind Direction: {0}'}"/>
+                            <Label
+                                Text="{Binding CurrentWeather.Current.Wind,
+                                    StringFormat='Wind: {0} km/h'}"/>
                         </VerticalStackLayout>
                         <Border
                             Background="{StaticResource Secondary}"
@@ -70,6 +78,7 @@
                                 <RoundRectangle CornerRadius="12,0,12,0"/>
                             </Border.StrokeShape>
                             <Grid>
+                                <!-- Xiaomi (MIUI) Dark Mode bug -->
                                 <Image
                                 Source="wind_direction.png"
                                 WidthRequest="{OnIdiom Desktop='240', Phone='200'}"/>
@@ -77,10 +86,7 @@
                                 <Image
                                 Source="up_arrow.png"
                                 WidthRequest="{OnIdiom Default='48', Phone='36'}"
-                                TranslationY="3"
-                                TranslationX="-1.5"
-                                Rotation="{Binding CurrentWeather.Current.WindDirection, 
-                                    Converter={StaticResource WindDirectionConverter}}"/>
+                                Rotation="{Binding CurrentWeather.Current.WindDegree}"/>
                             </Grid>
                         </Border>
                     </HorizontalStackLayout>
@@ -188,11 +194,14 @@
                                                 <Label
                                                     Text="{Binding Day.MinTemp, StringFormat='Min : {0:F0}°C'}"/>
                                             </VerticalStackLayout>
-                                            <VerticalStackLayout Grid.Column="1">
+                                            <VerticalStackLayout 
+                                                Grid.Column="1"
+                                                VerticalOptions="End">
+                                                
                                                 <Label
-                                                    Text="{Binding Day.MaxWind ,StringFormat='{0} km/h'}"/>
+                                                    Text="{Binding Day.MaxWind ,StringFormat='Wind: {0} km/h'}"/>
                                                 <Label
-                                                    Text="{Binding Day.ChanceOfRain ,StringFormat='{0}%'}"/>
+                                                    Text="{Binding Day.ChanceOfRain ,StringFormat='Rain: {0}%'}"/>
                                             </VerticalStackLayout>
                                         </Grid>
                                     </VerticalStackLayout>

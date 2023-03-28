@@ -6,7 +6,6 @@
     xmlns:c="clr-namespace:WeatherApp.Converters">
 
     <c:WeatherIconConverter x:Key="WeatherIconConverter"/>
-    <c:WindDirectionConverter x:Key="WindDirectionConverter"/>
 
     <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
         <Setter Property="BackgroundColor" Value="{StaticResource Dark}"/>
@@ -28,6 +27,7 @@
 
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource Light}"/>
+        <Setter Property="FontSize" Value="15"/>
     </Style>
 
     <Style TargetType="ScrollView">

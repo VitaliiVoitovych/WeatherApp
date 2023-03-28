@@ -24,6 +24,9 @@ public class Current
     [JsonPropertyName("wind_dir")]
     public required string WindDirection { get; set; }
 
+    [JsonPropertyName("wind_degree")]
+    public double WindDegree { get; set; }
+
     [JsonPropertyName("precip_mm")]
     public double Precipitation { get; set; }
 
