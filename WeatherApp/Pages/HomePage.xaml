@@ -84,7 +84,7 @@
                                 WidthRequest="{OnIdiom Desktop='240', Phone='200'}"/>
 
                                 <Image
-                                Source="up_arrow.png"
+                                Source="needle.png"
                                 WidthRequest="{OnIdiom Default='48', Phone='36'}"
                                 Rotation="{Binding CurrentWeather.Current.WindDegree}"/>
                             </Grid>
