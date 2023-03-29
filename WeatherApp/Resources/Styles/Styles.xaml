@@ -6,6 +6,7 @@
     xmlns:c="clr-namespace:WeatherApp.Converters">
 
     <c:WeatherIconConverter x:Key="WeatherIconConverter"/>
+    <c:PressureConverter x:Key="PressureConverter"/>
 
     <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
         <Setter Property="BackgroundColor" Value="{StaticResource Dark}"/>
