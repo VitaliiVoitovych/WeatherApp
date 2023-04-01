@@ -8,14 +8,21 @@
              x:DataType="viewModels:HomeViewModel">
     <Grid 
         RowDefinitions="50,*">
-        
-        <Label
-            Text="{Binding CurrentWeather.Location.Name}"
-            TextColor="{StaticResource Light}"
-            FontSize="32"
-            FontAttributes="Bold"
-            HorizontalTextAlignment="Center"/>
 
+        <Label
+                Text="{Binding CurrentWeather.Location.Name}"
+                TextColor="{StaticResource Light}"
+                FontSize="32"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"/>
+        <ImageButton
+            Source="refresh.png"
+            HorizontalOptions="End"
+            WidthRequest="36"
+            HeightRequest="36"
+            Margin="0,0,10,0"
+            Command="{Binding RefreshWeatherCommand}"/>
         <ScrollView 
             Grid.Row="1">
             
@@ -38,6 +45,7 @@
                         <Label
                             Text="{Binding CurrentWeather.Current.Temp, StringFormat='{0:F0}°C'}"
                             FontSize="28"
+                            FontAttributes="Bold"
                             TextColor="{StaticResource Light}"
                             HorizontalTextAlignment="Center"/>
                         

@@ -10,10 +10,8 @@ public class CurrentWeather
 
 }
 
-public class Current
+public class Current : Weather
 {
-    [JsonPropertyName("temp_c")]
-    public double Temp { get; set; }
 
     [JsonPropertyName("feelslike_c")]
     public double Feelslike { get; set; }
@@ -33,13 +31,10 @@ public class Current
     [JsonPropertyName("pressure_mb")]
     public double Pressure { get; set; }
 
-    [JsonPropertyName("is_day")]
-    public int IsDay { get; set; }
     public int Humidity { get; set; }
 
     public int Cloud { get; set; }
 
-    public required Condition Condition { get; set; }
 }
 
 public class Condition

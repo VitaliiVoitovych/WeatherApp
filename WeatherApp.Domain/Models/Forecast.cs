@@ -47,15 +47,8 @@ public class Day
 
 }
 
-public class Hour
+public class Hour : Weather
 {
     [JsonConverter(typeof(JsonDateTimeConverter))]
     public DateTime Time { get; set; }
-    public required Condition Condition { get; set; }
-
-    [JsonPropertyName("temp_c")]
-    public double Temp { get; set; }
-
-    [JsonPropertyName("is_day")]
-    public int IsDay { get; set; }
 }

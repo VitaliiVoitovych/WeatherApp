@@ -20,9 +20,19 @@ public partial class HomeViewModel : ObservableObject
     public HomeViewModel(IWeatherService service)
     {
         _service = service;
-        Task.Run(GetWeather);
-        Task.Run(Get24Hours);
-        Task.Run(GetDailyForecast);
+        Task.Run(GetWeatherAndForecast);
+    }
+
+    [RelayCommand]
+    private async Task RefreshWeather()
+    {
+        await GetWeather();
+    }
+
+    private async Task GetWeatherAndForecast()
+    {
+        await GetWeather();
+        await Task.WhenAll(Get24Hours(), GetDailyForecast());
     }
 
     private async Task GetWeather()
