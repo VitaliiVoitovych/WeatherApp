@@ -1,12 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using WeatherApp.Domain.Models;
+using WeatherApp.Pages;
 using WeatherApp.Services;
 
 namespace WeatherApp.ViewModels;
 
-public class FavouritesViewModel : ObservableObject
+public partial class FavouritesViewModel : ObservableObject
 {
     private readonly IWeatherService _service;
 
@@ -17,8 +19,20 @@ public class FavouritesViewModel : ObservableObject
     public FavouritesViewModel(IWeatherService service)
     {
         _service = service;
-
+        
         Task.Run(AddCitiesWeather);
+    }
+
+    [RelayCommand]
+    async Task GoToDetailsWeather(CurrentWeather currentWeather)
+    {
+        if (currentWeather is null) return;
+
+        await Shell.Current.GoToAsync($"{nameof(DetailsWeatherPage)}?id={currentWeather.Location.Name}", true,
+            new Dictionary<string, object>
+            {
+                {"CurrentWeather", currentWeather}
+            });
     }
 
     private async Task AddCitiesWeather()

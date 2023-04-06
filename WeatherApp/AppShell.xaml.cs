@@ -1,4 +1,6 @@
-﻿namespace WeatherApp
+﻿using WeatherApp.Pages;
+
+namespace WeatherApp
 {
     public partial class AppShell : Shell
     {
@@ -7,6 +9,8 @@
             InitializeComponent();
 
             BindingContext = this;
+
+            Routing.RegisterRoute(nameof(DetailsWeatherPage), typeof(DetailsWeatherPage));
 
             if (DeviceInfo.Idiom == DeviceIdiom.Phone)
                 CurrentItem = PhoneTabs;

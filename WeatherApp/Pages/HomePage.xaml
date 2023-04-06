@@ -10,12 +10,12 @@
         RowDefinitions="50,*">
 
         <Label
-                Text="{Binding CurrentWeather.Location.Name}"
-                TextColor="{StaticResource Light}"
-                FontSize="32"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"/>
+            Text="{Binding CurrentWeather.Location.Name}"
+            TextColor="{StaticResource Light}"
+            FontSize="32"
+            FontAttributes="Bold"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"/>
         <ImageButton
             Source="refresh.png"
             HorizontalOptions="End"

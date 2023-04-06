@@ -28,10 +28,12 @@ namespace WeatherApp
             builder.Services.AddTransient<HomeViewModel>();
             builder.Services.AddTransient<FavouritesViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddTransient<DetailsWeatherViewModel>();
 
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<FavouritesPage>();
             builder.Services.AddTransient<SettingsPage>();
+            builder.Services.AddTransient<DetailsWeatherPage>();
 
             return builder.Build();
         }
