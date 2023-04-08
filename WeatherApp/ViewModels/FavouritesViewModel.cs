@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using WeatherApp.Domain.Models;
 using WeatherApp.Pages;
 using WeatherApp.Services;
@@ -37,18 +36,9 @@ public partial class FavouritesViewModel : ObservableObject
 
     private async Task AddCitiesWeather()
     {
-        await foreach (var cityWeather in GetWeathersAsync())
+        await foreach (var cityWeather in _service.GetCitiesWeatherAsync(_cities))
         {
             FavouriteWeather.Add(cityWeather);
-        }
-    }
-
-    private async IAsyncEnumerable<CurrentWeather> GetWeathersAsync()
-    {
-        foreach (var city in _cities)
-        {
-            await Task.Delay(30);   
-            yield return await _service.GetCurrentWeatherAsync(city);
         }
     }
 }

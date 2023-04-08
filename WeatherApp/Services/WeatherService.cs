@@ -15,18 +15,41 @@ public class WeatherService : IWeatherService
         _httpClient = new HttpClient(new Xamarin.Android.Net.AndroidMessageHandler());
 #endif
     }
-    public async Task<CurrentWeather> GetCurrentWeatherAsync(string city)
+    public async Task<CurrentWeather> GetCurrentWeatherAsync(string cityName)
     {
-        return await _httpClient.GetFromJsonAsync<CurrentWeather>($"https://api.weatherapi.com/v1/current.json?key={apiKey}&q={city}");
+        return await _httpClient.GetFromJsonAsync<CurrentWeather>($"https://api.weatherapi.com/v1/current.json?key={apiKey}&q={cityName}");
     }
 
-    public async Task<List<Hour>> Get24HoursWeatherAsync(string city)
+    public async IAsyncEnumerable<Hour> Get24HoursWeatherAsync(string cityName)
     {
-        return (await _httpClient.GetFromJsonAsync<ForecastWeather>($"https://api.weatherapi.com/v1/forecast.json?key={apiKey}&q={city}&days=2")).Forecast.ForecastDays.SelectMany(f => f.Hours).Where(f => f.Time >= DateTime.Now && f.Time < DateTime.Now.AddHours(24)).ToList();
+        var hours = (await _httpClient.GetFromJsonAsync<ForecastWeather>($"https://api.weatherapi.com/v1/forecast.json?key={apiKey}&q={cityName}&days=2"))
+            .Forecast
+            .ForecastDays
+            .SelectMany(f => f.Hours)
+            .Where(f => f.Time >= DateTime.Now && f.Time < DateTime.Now.AddHours(24));
+        foreach (var hour in hours)
+        {
+            yield return hour;
+        }
     }
 
-    public async Task<List<ForecastDay>> GetForecastWeather(string city)
+    public async IAsyncEnumerable<ForecastDay> GetForecastWeather(string cityName)
     {
-        return (await _httpClient.GetFromJsonAsync<ForecastWeather>($"https://api.weatherapi.com/v1/forecast.json?key={apiKey}&q={city}&days=3")).Forecast.ForecastDays;
+        var days = (await _httpClient.GetFromJsonAsync<ForecastWeather>($"https://api.weatherapi.com/v1/forecast.json?key={apiKey}&q={cityName}&days=3"))
+            .Forecast
+            .ForecastDays;
+        foreach (var day in days)
+        {
+            yield return day;
+        }
+    }
+
+    public async IAsyncEnumerable<CurrentWeather> GetCitiesWeatherAsync(IEnumerable<string> cityNames)
+    {
+        foreach (var cityName in cityNames)
+        {
+            await Task.Delay(30);
+            yield return await GetCurrentWeatherAsync(cityName);
+        }
     }
 }

@@ -4,9 +4,11 @@ namespace WeatherApp.Services;
 
 public interface IWeatherService
 {
-    Task<CurrentWeather> GetCurrentWeatherAsync(string city);
+    Task<CurrentWeather> GetCurrentWeatherAsync(string cityName);
 
-    Task<List<Hour>> Get24HoursWeatherAsync(string city);
+    IAsyncEnumerable<Hour> Get24HoursWeatherAsync(string cityName);
 
-    Task<List<ForecastDay>> GetForecastWeather(string city);
+    IAsyncEnumerable<ForecastDay> GetForecastWeather(string cityName);
+
+    IAsyncEnumerable<CurrentWeather> GetCitiesWeatherAsync(IEnumerable<string> citiNames);
 }
