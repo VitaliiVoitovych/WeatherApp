@@ -32,75 +32,70 @@
             <VerticalStackLayout>
 
                 <!-- Current Weather -->
-                <Grid 
-                    RowDefinitions="{OnIdiom Desktop='*', Phone='*,*'}"
-                    ColumnDefinitions="{OnIdiom Desktop='*,*', Phone='*'}"
-                    VerticalOptions="Center"
-                    >
-                    
-                    <VerticalStackLayout
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        MinimumHeightRequest="320">
+                <VerticalStackLayout>
+
+                    <VerticalStackLayout>
                         <Image
-                            Source="{Binding CurrentWeather.Current, Converter={StaticResource WeatherIconConverter}}"
-                            HeightRequest="200"
-                            WidthRequest="200"/>
+                        Source="{Binding CurrentWeather.Current, Converter={StaticResource WeatherIconConverter}}"
+                        HeightRequest="200"
+                        WidthRequest="200"/>
 
                         <Label
-                            Text="{Binding CurrentWeather.Current.Temp, StringFormat='{0:F0}°C'}"
-                            FontSize="28"
-                            FontAttributes="Bold"
-                            TextColor="{StaticResource Light}"
-                            HorizontalTextAlignment="Center"/>
-                        
+                        Text="{Binding CurrentWeather.Current.Temp, StringFormat='{0:F0}°C'}"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource Light}"
+                        HorizontalTextAlignment="Center"/>
+
                         <Label
-                            Text="{Binding CurrentWeather.Current.Condition.Text}"
-                            HorizontalTextAlignment="Center"
-                            FontSize="24"
-                            TextColor="{StaticResource Light}"/>
+                        Text="{Binding CurrentWeather.Current.Condition.Text}"
+                        HorizontalTextAlignment="Center"
+                        FontSize="24"
+                        TextColor="{StaticResource Light}"/>
 
                     </VerticalStackLayout>
+
+
                     <FlexLayout
-                        Direction="Row"
-                        Wrap="Wrap"
-                        HorizontalOptions="Center"
-                        Grid.Row="{OnIdiom Desktop='0', Phone='1'}"
-                        Grid.Column="{OnIdiom Desktop='1', Phone='0'}">
+                    Direction="Row"
+                    Wrap="Wrap"
+                    AlignItems="Center"
+                    HorizontalOptions="Center">
+
                         <v:WeatherInfoView 
-                            ImageSource="thermometer.png"
-                            FrameTitle="Feelslike"
-                            Value="{Binding CurrentWeather.Current.Feelslike,
-                                StringFormat='{0:F0}°C'}"/>
+                        ImageSource="thermometer.png"
+                        FrameTitle="Feelslike"
+                        Value="{Binding CurrentWeather.Current.Feelslike,
+                            StringFormat='{0:F0}°C'}"/>
 
                         <v:WeatherInfoView
-                            ImageSource="thermometer.png"
-                            FrameTitle="Pressure"
-                            Value="{Binding CurrentWeather.Current.Pressure,
-                                Converter={StaticResource PressureConverter},
-                                StringFormat='{0:F0}mmHg'}"/>
+                        ImageSource="thermometer.png"
+                        FrameTitle="Pressure"
+                        Value="{Binding CurrentWeather.Current.Pressure,
+                            Converter={StaticResource PressureConverter},
+                            StringFormat='{0:F0}mmHg'}"/>
 
                         <v:WeatherInfoView
-                            ImageSource="humidity.png"
-                            FrameTitle="Humidity"
-                            Value="{Binding CurrentWeather.Current.Humidity,
-                                StringFormat='{0}%'}"/>
+                        ImageSource="humidity.png"
+                        FrameTitle="Humidity"
+                        Value="{Binding CurrentWeather.Current.Humidity,
+                            StringFormat='{0}%'}"/>
                         <v:WeatherInfoView
-                            ImageSource="cloud.png"
-                            FrameTitle="Cloud cover"
-                            Value="{Binding CurrentWeather.Current.Cloud,
-                                StringFormat='{0:F0}%'}"/>
+                        ImageSource="cloud.png"
+                        FrameTitle="Cloud cover"
+                        Value="{Binding CurrentWeather.Current.Cloud,
+                            StringFormat='{0:F0}%'}"/>
                         <v:WeatherInfoView
-                            ImageSource="windsock.png"
-                            FrameTitle="Wind direction"
-                            Value="{Binding CurrentWeather.Current.WindDirection}"/>
+                        ImageSource="windsock.png"
+                        FrameTitle="Wind direction"
+                        Value="{Binding CurrentWeather.Current.WindDirection}"/>
                         <v:WeatherInfoView
-                            ImageSource="wind.png"
-                            FrameTitle="Wind Speed"
-                            Value="{Binding CurrentWeather.Current.Wind,
-                                StringFormat='{0:F1} km/h'}"/>
+                        ImageSource="wind.png"
+                        FrameTitle="Wind Speed"
+                        Value="{Binding CurrentWeather.Current.Wind,
+                        StringFormat='{0:F1} km/h'}"/>
                     </FlexLayout>
-                </Grid>
+                </VerticalStackLayout>
 
                 <!-- 24 Hours -->
                 <VerticalStackLayout

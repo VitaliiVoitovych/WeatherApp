@@ -41,8 +41,7 @@
                         <Frame
                             Background="{StaticResource Secondary}"
                             CornerRadius="12"
-                            Padding="15"
-                            MinimumHeightRequest="75">
+                            Padding="15">
 
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer
@@ -53,7 +52,7 @@
                                 VerticalOptions="Center">
 
                                 <Grid
-                                    ColumnDefinitions="72, *, Auto">
+                                    ColumnDefinitions="72, *">
                                     <Image
                                         Source="{Binding Current, 
                                             Converter={StaticResource WeatherIconConverter}}"
@@ -64,7 +63,8 @@
 
                                     <VerticalStackLayout
                                         Grid.Column="1"
-                                        VerticalOptions="Center">
+                                        VerticalOptions="Center"
+                                        MinimumHeightRequest="75">
                                         
                                         <Label
                                             Text="{Binding Location.Name}"
