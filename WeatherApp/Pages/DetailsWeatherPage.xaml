@@ -2,27 +2,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:WeatherApp.ViewModels"
+             xmlns:v="clr-namespace:WeatherApp.Views"
              x:Class="WeatherApp.Pages.DetailsWeatherPage"
              x:DataType="viewModel:DetailsWeatherViewModel"
              Shell.PresentationMode="{OnIdiom Desktop='Animated', Phone='ModalAnimated'}">
     <Grid
-        RowDefinitions="50,*">
-        <Label
-            Text="{Binding CurrentWeather.Location.Name}"
-            TextColor="{StaticResource Light}"
-            FontSize="32"
-            FontAttributes="Bold"
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center"/>
+        RowDefinitions="Auto,*">
+        <VerticalStackLayout>
+            <ImageButton
+                Source="left_arrow.png"
+                HorizontalOptions="Start"
+                WidthRequest="36"
+                HeightRequest="36"
+                Margin="10,0,0,0"
+                IsVisible="{OnIdiom Desktop='False', Phone='True'}"
+                Command="{Binding GoToBackCommand}"/>
+            <Label
+                Text="{Binding CurrentWeather.Location.Name}"
+                TextColor="{StaticResource Light}"
+                FontSize="32"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                LineBreakMode="WordWrap"/>
+        </VerticalStackLayout>
 
-        <ImageButton
-            Source="left_arrow.png"
-            HorizontalOptions="Start"
-            WidthRequest="36"
-            HeightRequest="36"
-            Margin="10,0,0,0"
-            IsVisible="{OnIdiom Desktop='False', Phone='True'}"
-            Command="{Binding GoToBackCommand}"/>
 
         <ScrollView 
             Grid.Row="1">
@@ -49,96 +54,47 @@
                         TextColor="{StaticResource Light}"/>
 
                 </VerticalStackLayout>
-                <Grid
-                    ColumnDefinitions="*,*">
-                    
-                    <VerticalStackLayout
-                        HorizontalOptions="Center"
-                        Margin="0,20,0,0"
-                        Spacing="7">
 
-                        <VerticalStackLayout.Resources>
-                            <Style TargetType="Image" x:Key="ImageStyle">
-                                <Setter 
-                                    Property="Margin" 
-                                    Value="0,0,10,0"/>
-                                <Setter 
-                                    Property="WidthRequest"
-                                    Value="48"/>
-                                <Setter
-                                    Property="HeightRequest"
-                                    Value="48"/>
-                            </Style>
-                        </VerticalStackLayout.Resources>
 
-                        <HorizontalStackLayout>
-                            <Image
-                            Source="thermometer.png"
-                            Style="{StaticResource ImageStyle}"/>
-                            <Label
-                                Text="{Binding CurrentWeather.Current.Feelslike,
-                                    StringFormat='Feelslike: {0:F0}°C'}"
-                                VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <Image
-                                Source="thermometer.png"
-                                Style="{StaticResource ImageStyle}"/>
-                            <Label
-                                Text="{Binding CurrentWeather.Current.Pressure,
-                                    StringFormat='Pressure: {0:F0}mmHg', Converter={StaticResource PressureConverter}}"
-                                VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <Image
-                                Source="humidity.png"
-                                Style="{StaticResource ImageStyle}"/>
-                            <Label
-                                Text="{Binding CurrentWeather.Current.Humidity,
-                                    StringFormat='Humidity: {0}%'}"
-                                VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <Image
-                                Source="cloud.png"
-                                Style="{StaticResource ImageStyle}"/>
-                            <Label
-                                Text="{Binding CurrentWeather.Current.Cloud,
-                                    StringFormat='Cloud cover: {0}%'}"
-                                VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <Image
-                                Source="windsock.png"
-                                Style="{StaticResource ImageStyle}"/>
-                            <Label
-                                Text="{Binding CurrentWeather.Current.WindDirection,
-                                    StringFormat='Wind Direction: {0}'}"
-                                VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <Image
-                                Source="wind.png"
-                                Style="{StaticResource ImageStyle}"/>
-                            <Label
-                                Text="{Binding CurrentWeather.Current.Wind,
-                                    StringFormat='Wind: {0:F1} km/h'}"
-                                VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                    <Grid
-                        Grid.Column="1">
-                        
-                        <Image
-                            Source="wind_direction.png"
-                            WidthRequest="{OnIdiom Desktop='240', Phone='200'}"/>
+                <FlexLayout
+                    Direction="Row"
+                    Wrap="Wrap"
+                    AlignItems="Center"
+                    HorizontalOptions="Center">
 
-                        <Image
-                            Source="needle.png"
-                            WidthRequest="{OnIdiom Default='48', Phone='36'}"
-                            Rotation="{Binding CurrentWeather.Current.WindDegree}"/>
-                    </Grid>
-                </Grid>
+                    <v:WeatherInfoView 
+                        ImageSource="thermometer.png"
+                        FrameTitle="Feelslike"
+                        Value="{Binding CurrentWeather.Current.Feelslike,
+                            StringFormat='{0:F0}°C'}"/>
+
+                    <v:WeatherInfoView
+                        ImageSource="thermometer.png"
+                        FrameTitle="Pressure"
+                        Value="{Binding CurrentWeather.Current.Pressure,
+                            Converter={StaticResource PressureConverter},
+                            StringFormat='{0:F0}mmHg'}"/>
+
+                    <v:WeatherInfoView
+                        ImageSource="humidity.png"
+                        FrameTitle="Humidity"
+                        Value="{Binding CurrentWeather.Current.Humidity,
+                            StringFormat='{0}%'}"/>
+                    <v:WeatherInfoView
+                        ImageSource="cloud.png"
+                        FrameTitle="Cloud cover"
+                        Value="{Binding CurrentWeather.Current.Cloud,
+                            StringFormat='{0:F0}%'}"/>
+                    <v:WeatherInfoView
+                        ImageSource="windsock.png"
+                        FrameTitle="Wind direction"
+                        Value="{Binding CurrentWeather.Current.WindDirection}"/>
+                    <v:WeatherInfoView
+                        ImageSource="wind.png"
+                        FrameTitle="Wind Speed"
+                        Value="{Binding CurrentWeather.Current.Wind,
+                        StringFormat='{0:F1} km/h'}"/>
+                </FlexLayout>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

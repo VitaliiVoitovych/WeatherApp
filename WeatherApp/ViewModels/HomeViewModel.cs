@@ -20,23 +20,28 @@ public partial class HomeViewModel : ObservableObject
     public HomeViewModel(IWeatherService service)
     {
         _service = service;
-        //Task.Run(GetWeatherAndForecast);
-        Task.Run(GetWeather);
-        Task.WhenAll(Get24Hours(), GetDailyForecast());
+        Task.Run(GetWeatherAndForecastAsync);
     }
 
     [RelayCommand]
     private async Task RefreshWeather()
     {
-        await GetWeather();
+        await GetWeatherAsync();
     }
 
-    private async Task GetWeather()
+    private async Task GetWeatherAndForecastAsync()
+    {
+        await GetWeatherAsync();
+        await Get24HoursAsync();
+        await GetDailyForecastAsync();
+    }
+
+    private async Task GetWeatherAsync()
     {
         CurrentWeather = await _service.GetCurrentWeatherAsync("Sambir");
     }
 
-    private async Task Get24Hours()
+    private async Task Get24HoursAsync()
     {
         var hours = _service.Get24HoursWeatherAsync("Sambir");
 
@@ -46,7 +51,7 @@ public partial class HomeViewModel : ObservableObject
         }
     }
 
-    private async Task GetDailyForecast()
+    private async Task GetDailyForecastAsync()
     {
         var days = _service.GetForecastWeather("Sambir");
 

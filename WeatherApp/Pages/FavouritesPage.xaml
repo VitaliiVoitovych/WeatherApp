@@ -41,26 +41,31 @@
                         <Frame
                             Background="{StaticResource Secondary}"
                             CornerRadius="12"
-                            Padding="15">
+                            Padding="15"
+                            MinimumHeightRequest="75">
 
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer
                                     CommandParameter="{Binding .}"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:FavouritesViewModel}}, Path=GoToDetailsWeatherCommand}"/>
                             </Frame.GestureRecognizers>
-                            <Grid
+                            <VerticalStackLayout
                                 VerticalOptions="Center">
 
-                                <HorizontalStackLayout>
+                                <Grid
+                                    ColumnDefinitions="72, *, Auto">
                                     <Image
                                         Source="{Binding Current, 
                                             Converter={StaticResource WeatherIconConverter}}"
                                         WidthRequest="64"
                                         HeightRequest="64"
-                                        Margin="0,0,22,0"/>
+                                        Margin="0,0,12,0"
+                                        HorizontalOptions="Start"/>
 
                                     <VerticalStackLayout
-                                     HorizontalOptions="Center">
+                                        Grid.Column="1"
+                                        VerticalOptions="Center">
+                                        
                                         <Label
                                             Text="{Binding Location.Name}"
                                             FontSize="24"
@@ -69,23 +74,20 @@
 
                                         <Label
                                             Text="{Binding Location.LocalTime}"
-                                            VerticalTextAlignment="Center"/>
-
-                                        <Label
-                                            Text="{Binding Current.Condition.Text}"
-                                            VerticalTextAlignment="Center"/>
+                                            VerticalTextAlignment="Center"
+                                            LineBreakMode="WordWrap"/>
                                     </VerticalStackLayout>
 
-                                    <Label
-                                        Text="{Binding Current.Temp, 
-                                            StringFormat='{0:F0}°C'}"
-                                        FontSize="24"
-                                        FontAttributes="Bold"
-                                        VerticalOptions="Center"
-                                        Margin="50,0,0,0"/>
-                                </HorizontalStackLayout>
-
-                            </Grid>
+                                </Grid>
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding Current.Temp, 
+                                        StringFormat='{0:F0}°C'}"
+                                    FontSize="24"
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="End"/>
+                            </VerticalStackLayout>
 
                         </Frame>
                     </DataTemplate>

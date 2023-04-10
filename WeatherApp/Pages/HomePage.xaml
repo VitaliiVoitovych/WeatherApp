@@ -4,25 +4,28 @@
              xmlns:viewModels="clr-namespace:WeatherApp.ViewModels"
              xmlns:models="clr-namespace:WeatherApp.Domain.Models;assembly=WeatherApp.Domain"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:v="clr-namespace:WeatherApp.Views"
              x:Class="WeatherApp.Pages.HomePage"
              x:DataType="viewModels:HomeViewModel">
     <Grid 
-        RowDefinitions="50,*">
+        RowDefinitions="Auto,*">
 
-        <Label
-            Text="{Binding CurrentWeather.Location.Name}"
-            TextColor="{StaticResource Light}"
-            FontSize="32"
-            FontAttributes="Bold"
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center"/>
-        <ImageButton
-            Source="refresh.png"
-            HorizontalOptions="End"
-            WidthRequest="36"
-            HeightRequest="36"
-            Margin="0,0,10,0"
-            Command="{Binding RefreshWeatherCommand}"/>
+        <VerticalStackLayout>
+            <ImageButton
+                Source="refresh.png"
+                HorizontalOptions="End"
+                WidthRequest="36"
+                HeightRequest="36"
+                Margin="0,0,10,0"
+                Command="{Binding RefreshWeatherCommand}"/>
+            <Label
+                Text="{Binding CurrentWeather.Location.Name}"
+                TextColor="{StaticResource Light}"
+                FontSize="32"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
         <ScrollView 
             Grid.Row="1">
             
@@ -32,11 +35,13 @@
                 <Grid 
                     RowDefinitions="{OnIdiom Desktop='*', Phone='*,*'}"
                     ColumnDefinitions="{OnIdiom Desktop='*,*', Phone='*'}"
-                    VerticalOptions="Center">
+                    VerticalOptions="Center"
+                    >
                     
                     <VerticalStackLayout
                         Grid.Column="0"
-                        Grid.Row="0">
+                        Grid.Row="0"
+                        MinimumHeightRequest="320">
                         <Image
                             Source="{Binding CurrentWeather.Current, Converter={StaticResource WeatherIconConverter}}"
                             HeightRequest="200"
@@ -56,57 +61,45 @@
                             TextColor="{StaticResource Light}"/>
 
                     </VerticalStackLayout>
-                    <HorizontalStackLayout
-                        Grid.Column="{OnIdiom Desktop='1' ,Phone='0'}"
+                    <FlexLayout
+                        Direction="Row"
+                        Wrap="Wrap"
+                        HorizontalOptions="Center"
                         Grid.Row="{OnIdiom Desktop='0', Phone='1'}"
-                        Margin="0,20,0,0"
-                        HorizontalOptions="End">
-                        
-                        <VerticalStackLayout
-                            VerticalOptions="Center"
-                            Margin="0,0,20,0">
-                            
-                            <Label
-                                Text="{Binding CurrentWeather.Current.Feelslike,
-                                    StringFormat='Feelslike: {0:F0}°C'}"/>
-                            <Label 
-                                Text="{Binding CurrentWeather.Current.Pressure,
-                                    Converter={StaticResource PressureConverter},
-                                    StringFormat='Pressure: {0:F0} mmHg'}"/>
-                            <Label 
-                                Text="{Binding CurrentWeather.Current.Humidity, 
-                                    StringFormat='Humidity: {0}%'}"/>
-                            <Label
-                                Text="{Binding CurrentWeather.Current.Cloud,
-                                    StringFormat='Cloud cover: {0} %'}"/>
-                            <Label
-                                Text="{Binding CurrentWeather.Current.WindDirection, 
-                                    StringFormat='Wind Direction: {0}'}"/>
-                            <Label
-                                Text="{Binding CurrentWeather.Current.Wind,
-                                    StringFormat='Wind: {0} km/h'}"/>
-                        </VerticalStackLayout>
-                        <Border
-                            Background="{StaticResource Secondary}"
-                            HorizontalOptions="Fill"
-                            StrokeThickness="0">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="12,0,12,0"/>
-                            </Border.StrokeShape>
-                            
-                            <Grid>
-                                <!-- Xiaomi (MIUI) Dark Mode bug -->
-                                <Image
-                                    Source="wind_direction.png"
-                                    WidthRequest="{OnIdiom Desktop='240', Phone='200'}"/>
+                        Grid.Column="{OnIdiom Desktop='1', Phone='0'}">
+                        <v:WeatherInfoView 
+                            ImageSource="thermometer.png"
+                            FrameTitle="Feelslike"
+                            Value="{Binding CurrentWeather.Current.Feelslike,
+                                StringFormat='{0:F0}°C'}"/>
 
-                                <Image
-                                    Source="needle.png"
-                                    WidthRequest="{OnIdiom Default='48', Phone='36'}"
-                                    Rotation="{Binding CurrentWeather.Current.WindDegree}"/>
-                            </Grid>
-                        </Border>
-                    </HorizontalStackLayout>
+                        <v:WeatherInfoView
+                            ImageSource="thermometer.png"
+                            FrameTitle="Pressure"
+                            Value="{Binding CurrentWeather.Current.Pressure,
+                                Converter={StaticResource PressureConverter},
+                                StringFormat='{0:F0}mmHg'}"/>
+
+                        <v:WeatherInfoView
+                            ImageSource="humidity.png"
+                            FrameTitle="Humidity"
+                            Value="{Binding CurrentWeather.Current.Humidity,
+                                StringFormat='{0}%'}"/>
+                        <v:WeatherInfoView
+                            ImageSource="cloud.png"
+                            FrameTitle="Cloud cover"
+                            Value="{Binding CurrentWeather.Current.Cloud,
+                                StringFormat='{0:F0}%'}"/>
+                        <v:WeatherInfoView
+                            ImageSource="windsock.png"
+                            FrameTitle="Wind direction"
+                            Value="{Binding CurrentWeather.Current.WindDirection}"/>
+                        <v:WeatherInfoView
+                            ImageSource="wind.png"
+                            FrameTitle="Wind Speed"
+                            Value="{Binding CurrentWeather.Current.Wind,
+                                StringFormat='{0:F1} km/h'}"/>
+                    </FlexLayout>
                 </Grid>
 
                 <!-- 24 Hours -->

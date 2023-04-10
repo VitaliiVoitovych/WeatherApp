@@ -11,7 +11,7 @@ public partial class FavouritesViewModel : ObservableObject
 {
     private readonly IWeatherService _service;
 
-    private readonly string[] _cities = { "Lviv", "Kiev", "Warszawa" };
+    private readonly string[] _cities = { "Lviv", "Kiev", "Warszawa", "Volia Baranetska", "Sao Sebastiao Da Feira" };
 
     public ObservableCollection<CurrentWeather> FavouriteWeather { get; } = new();
 
