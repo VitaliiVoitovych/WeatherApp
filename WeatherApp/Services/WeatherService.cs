@@ -48,7 +48,6 @@ public class WeatherService : IWeatherService
     {
         foreach (var cityName in cityNames)
         {
-            await Task.Delay(30);
             yield return await GetCurrentWeatherAsync(cityName);
         }
     }

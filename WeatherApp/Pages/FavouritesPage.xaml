@@ -17,9 +17,22 @@
                 HeightRequest="32"
                 HorizontalOptions="Start"/>
 
-            <Entry 
+            <Entry
                 MaxLength="200"
-                WidthRequest="300"/>
+                WidthRequest="{OnIdiom Desktop='350', Phone='225'}"
+                Placeholder="City name"
+                PlaceholderColor="{StaticResource Secondary}"
+                x:Name="cityNameEntry"/>
+            <Button
+                Text="+"
+                FontSize="18"
+                FontAttributes="Bold"
+                Command="{Binding AddFavouriteCityCommand}"
+                CommandParameter="{x:Reference cityNameEntry}"
+                Margin="10,0,0,0"
+                Background="{StaticResource Accent}"
+                TextColor="{StaticResource Dark}"
+                HeightRequest="40"/>
 
         </HorizontalStackLayout>
 

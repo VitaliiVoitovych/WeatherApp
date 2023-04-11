@@ -11,7 +11,8 @@ public partial class FavouritesViewModel : ObservableObject
 {
     private readonly IWeatherService _service;
 
-    private readonly string[] _cities = { "Lviv", "Kiev", "Warszawa", "Volia Baranetska", "Sao Sebastiao Da Feira" };
+    Settings setting = new();
+    SettingsService settingsService = new();
 
     public ObservableCollection<CurrentWeather> FavouriteWeather { get; } = new();
 
@@ -34,9 +35,22 @@ public partial class FavouritesViewModel : ObservableObject
             });
     }
 
+    [RelayCommand]
+    async Task AddFavouriteCity(Entry entry)
+    {
+        var cityName = entry.Text;
+        if (string.IsNullOrWhiteSpace(cityName) || setting.FavouriteCities.Contains(cityName)) return;
+
+        setting.FavouriteCities.Add(cityName);
+        var weather = await _service.GetCurrentWeatherAsync(cityName);
+        FavouriteWeather.Add(weather);
+    }
+
     private async Task AddCitiesWeather()
     {
-        await foreach (var cityWeather in _service.GetCitiesWeatherAsync(_cities))
+        if (setting.FavouriteCities.Count == 0) return;
+        // TODO : Fix this
+        await foreach (var cityWeather in _service.GetCitiesWeatherAsync(setting.FavouriteCities))
         {
             FavouriteWeather.Add(cityWeather);
         }

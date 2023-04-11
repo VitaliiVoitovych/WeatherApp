@@ -6,7 +6,7 @@
     <Border
         BackgroundColor="{StaticResource Secondary}"
         Padding="10"
-        Margin="5"
+        Margin="3"
         MinimumWidthRequest="175"
         BindingContext="{x:Reference this}">
 
@@ -15,7 +15,7 @@
         </Border.StrokeShape>
         
         <VerticalStackLayout
-            MinimumHeightRequest="100">
+            MinimumHeightRequest="75">
             <Image
                     Source="{Binding ImageSource}"
                     WidthRequest="36"
@@ -24,7 +24,7 @@
             <Label
                     Grid.Column="1"
                     Text="{Binding FrameTitle}"
-                    FontSize="18"
+                    FontSize="16"
                     LineBreakMode="WordWrap"
                     HorizontalTextAlignment="End"
                     VerticalTextAlignment="End"
@@ -32,7 +32,7 @@
             <Label
                     Text="{Binding Value}"
                     HorizontalOptions="End"
-                    FontSize="24"
+                    FontSize="20"
                     FontAttributes="Bold"/>
         </VerticalStackLayout>
     </Border>
