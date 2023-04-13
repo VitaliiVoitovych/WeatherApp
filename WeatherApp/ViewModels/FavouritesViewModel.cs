@@ -10,16 +10,15 @@ namespace WeatherApp.ViewModels;
 public partial class FavouritesViewModel : ObservableObject
 {
     private readonly IWeatherService _service;
-
-    Settings setting = new();
-    SettingsService settingsService = new();
+    private readonly SettingsService _settings;
 
     public ObservableCollection<CurrentWeather> FavouriteWeather { get; } = new();
 
-    public FavouritesViewModel(IWeatherService service)
+    public FavouritesViewModel(IWeatherService service, SettingsService settings)
     {
         _service = service;
-        
+        _settings = settings;
+
         Task.Run(AddCitiesWeather);
     }
 
@@ -39,18 +38,19 @@ public partial class FavouritesViewModel : ObservableObject
     async Task AddFavouriteCity(Entry entry)
     {
         var cityName = entry.Text;
-        if (string.IsNullOrWhiteSpace(cityName) || setting.FavouriteCities.Contains(cityName)) return;
+        if (string.IsNullOrWhiteSpace(cityName) || _settings.Settings.FavouriteCities.Contains(cityName)) return;
 
-        setting.FavouriteCities.Add(cityName);
+        _settings.Settings.FavouriteCities.Add(cityName);
         var weather = await _service.GetCurrentWeatherAsync(cityName);
         FavouriteWeather.Add(weather);
+        _settings.Save();
     }
 
     private async Task AddCitiesWeather()
     {
-        if (setting.FavouriteCities.Count == 0) return;
+        if (_settings.Settings.FavouriteCities.Count == 0) return;
         // TODO : Fix this
-        await foreach (var cityWeather in _service.GetCitiesWeatherAsync(setting.FavouriteCities))
+        await foreach (var cityWeather in _service.GetCitiesWeatherAsync(_settings.Settings.FavouriteCities))
         {
             FavouriteWeather.Add(cityWeather);
         }

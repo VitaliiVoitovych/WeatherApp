@@ -24,6 +24,7 @@ namespace WeatherApp
 		builder.Logging.AddDebug();
 #endif
             builder.Services.AddSingleton<IWeatherService, WeatherService>();
+            builder.Services.AddSingleton<SettingsService>();
 
             builder.Services.AddTransient<HomeViewModel>();
             builder.Services.AddTransient<FavouritesViewModel>();

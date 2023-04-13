@@ -10,6 +10,8 @@ public partial class HomeViewModel : ObservableObject
 {
     private readonly IWeatherService _service;
 
+    private readonly SettingsService _settings;
+
     [ObservableProperty]
     private CurrentWeather currentWeather;
 
@@ -17,10 +19,13 @@ public partial class HomeViewModel : ObservableObject
 
     public ObservableCollection<ForecastDay> Days { get; set; } = new();
 
-    public HomeViewModel(IWeatherService service)
+    public HomeViewModel(IWeatherService service, SettingsService settings)
     {
         _service = service;
+        _settings = settings;
+
         Task.Run(GetWeatherAndForecastAsync);
+        
     }
 
     [RelayCommand]
