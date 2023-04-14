@@ -4,7 +4,8 @@
              xmlns:viewModel="clr-namespace:WeatherApp.ViewModels"
              xmlns:model="clr-namespace:WeatherApp.Domain.Models;assembly=WeatherApp.Domain"
              x:Class="WeatherApp.Pages.FavouritesPage"
-             x:DataType="viewModel:FavouritesViewModel">
+             x:DataType="viewModel:FavouritesViewModel"
+             x:Name="favouritePage">
     <Grid
         RowDefinitions="50,*">
 
@@ -51,7 +52,68 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:CurrentWeather">
-                        <Frame
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItem
+                                    IconImageSource="cross.png"
+                                    BackgroundColor="Transparent" 
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding BindingContext.RemoveCommand, Source={x:Reference favouritePage}}"/>
+                            </SwipeView.RightItems>
+                            <Frame
+                            Background="{StaticResource Secondary}"
+                            CornerRadius="12"
+                            Padding="15">
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModel:FavouritesViewModel}}, Path=GoToDetailsWeatherCommand}"/>
+                                </Frame.GestureRecognizers>
+                                <VerticalStackLayout
+                                VerticalOptions="Center">
+
+                                    <Grid
+                                    ColumnDefinitions="72, *">
+                                        <Image
+                                        Source="{Binding Current, 
+                                            Converter={StaticResource WeatherIconConverter}}"
+                                        WidthRequest="64"
+                                        HeightRequest="64"
+                                        Margin="0,0,12,0"
+                                        HorizontalOptions="Start"/>
+
+                                        <VerticalStackLayout
+                                        Grid.Column="1"
+                                        VerticalOptions="Center"
+                                        MinimumHeightRequest="75">
+
+                                            <Label
+                                            Text="{Binding Location.Name}"
+                                            FontSize="24"
+                                            FontAttributes="Bold"
+                                            VerticalTextAlignment="Center"/>
+
+                                            <Label
+                                            Text="{Binding Location.LocalTime}"
+                                            VerticalTextAlignment="Center"
+                                            LineBreakMode="WordWrap"/>
+                                        </VerticalStackLayout>
+
+                                    </Grid>
+                                    <Label
+                                    Grid.Column="1"
+                                    Text="{Binding Current.Temp, 
+                                        StringFormat='{0:F0}°C'}"
+                                    FontSize="24"
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="End"/>
+                                </VerticalStackLayout>
+
+                            </Frame>
+                        </SwipeView>
+                        <!--<Frame
                             Background="{StaticResource Secondary}"
                             CornerRadius="12"
                             Padding="15">
@@ -102,7 +164,7 @@
                                     HorizontalOptions="End"/>
                             </VerticalStackLayout>
 
-                        </Frame>
+                        </Frame>-->
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

@@ -35,7 +35,7 @@ public partial class FavouritesViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task AddFavouriteCity(Entry entry)
+    private async Task AddFavouriteCity(Entry entry)
     {
         var cityName = entry.Text;
         if (string.IsNullOrWhiteSpace(cityName) || _settings.Settings.FavouriteCities.Contains(cityName)) return;
@@ -43,6 +43,14 @@ public partial class FavouritesViewModel : ObservableObject
         _settings.Settings.FavouriteCities.Add(cityName);
         var weather = await _service.GetCurrentWeatherAsync(cityName);
         FavouriteWeather.Add(weather);
+        _settings.Save();
+    }
+
+    [RelayCommand]
+    private void Remove(CurrentWeather cityWeather)
+    {
+        _settings.Settings.FavouriteCities.Remove(cityWeather.Location.Name);
+        FavouriteWeather.Remove(cityWeather);
         _settings.Save();
     }
 
