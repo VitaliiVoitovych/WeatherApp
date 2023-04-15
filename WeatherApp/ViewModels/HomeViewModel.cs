@@ -31,7 +31,7 @@ public partial class HomeViewModel : ObservableObject
     [RelayCommand]
     private async Task RefreshWeather()
     {
-        await GetWeatherAsync();
+        await GetWeatherAndForecastAsync();
     }
 
     private async Task GetWeatherAndForecastAsync()
@@ -43,13 +43,14 @@ public partial class HomeViewModel : ObservableObject
 
     private async Task GetWeatherAsync()
     {
-        CurrentWeather = await _service.GetCurrentWeatherAsync("Sambir");
+        CurrentWeather = await _service.GetCurrentWeatherAsync(_settings.Settings.MainCity);
     }
 
     private async Task Get24HoursAsync()
     {
-        var hours = _service.Get24HoursWeatherAsync("Sambir");
+        var hours = _service.Get24HoursWeatherAsync(_settings.Settings.MainCity);
 
+        Hours.Clear();
         await foreach (var hour in hours)
         {
             Hours.Add(hour);
@@ -58,8 +59,9 @@ public partial class HomeViewModel : ObservableObject
 
     private async Task GetDailyForecastAsync()
     {
-        var days = _service.GetForecastWeather("Sambir");
+        var days = _service.GetForecastWeather(_settings.Settings.MainCity);
 
+        Days.Clear();
         await foreach (var day in days)
         {
             Days.Add(day);

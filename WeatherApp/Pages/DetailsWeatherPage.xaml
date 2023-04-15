@@ -95,6 +95,14 @@
                         Value="{Binding CurrentWeather.Current.Wind,
                         StringFormat='{0:F1} km/h'}"/>
                 </FlexLayout>
+                <Button
+                    Text="Set main city"
+                    FontSize="18"
+                    WidthRequest="150"
+                    Margin="0,20,0,0"
+                    Background="{StaticResource Accent}"
+                    TextColor="{StaticResource Dark}"
+                    Command="{Binding SetMainCityCommand}"/>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>
