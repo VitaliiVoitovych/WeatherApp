@@ -38,12 +38,21 @@ public partial class FavouritesViewModel : ObservableObject
     private async Task AddFavouriteCity(Entry entry)
     {
         var cityName = entry.Text;
-        if (string.IsNullOrWhiteSpace(cityName) || _settings.Settings.FavouriteCities.Contains(cityName)) return;
+        if (string.IsNullOrWhiteSpace(cityName) || 
+            _settings.Settings.FavouriteCities.Contains(cityName)) return;
 
-        _settings.Settings.FavouriteCities.Add(cityName);
-        var weather = await _service.GetCurrentWeatherAsync(cityName);
-        FavouriteWeather.Add(weather);
-        _settings.Save();
+        try
+        {
+            var weather = await _service.GetCurrentWeatherAsync(cityName);
+
+            _settings.Settings.FavouriteCities.Add(cityName);
+            FavouriteWeather.Add(weather);
+            _settings.Save();
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", ex.Message, "Oh");
+        }
     }
 
     [RelayCommand]
