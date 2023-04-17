@@ -8,13 +8,25 @@ namespace WeatherApp.ViewModels;
 [QueryProperty("CurrentWeather", "CurrentWeather")]
 public partial class DetailsWeatherViewModel : ObservableObject
 {
-    [ObservableProperty]
+
     CurrentWeather currentWeather;
+    public CurrentWeather CurrentWeather
+    {
+        get => currentWeather;
+        set
+        {
+            currentWeather = value;
+            OnPropertyChanged();
+        }
+    }
 
     private readonly SettingsService _settings;
-    public DetailsWeatherViewModel(SettingsService settings)
+    private readonly CurrentWeatherService _currentWeatherService;
+
+    public DetailsWeatherViewModel(SettingsService settings, CurrentWeatherService currentWeatherService)
     {
         _settings = settings;
+        _currentWeatherService = currentWeatherService;
     }
 
     [RelayCommand]
@@ -33,6 +45,7 @@ public partial class DetailsWeatherViewModel : ObservableObject
         }
         _settings.Settings.MainCity = CurrentWeather.Location.Name;
         _settings.Save();
+        await _currentWeatherService.RefreshWeather();
         await Shell.Current.DisplayAlert("", "The city is seted. Click the reload button on the home page", "Ok");
     }
 }

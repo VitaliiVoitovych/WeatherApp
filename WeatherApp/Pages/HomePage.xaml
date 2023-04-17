@@ -19,7 +19,7 @@
                 Margin="0,0,10,0"
                 Command="{Binding RefreshWeatherCommand}"/>
             <Label
-                Text="{Binding CurrentWeather.Location.Name}"
+                Text="{Binding TestService.CurrentWeather.Location.Name}"
                 TextColor="{StaticResource Light}"
                 FontSize="32"
                 FontAttributes="Bold"
@@ -36,19 +36,19 @@
 
                     <VerticalStackLayout>
                         <Image
-                        Source="{Binding CurrentWeather.Current, Converter={StaticResource WeatherIconConverter}}"
+                        Source="{Binding TestService.CurrentWeather.Current, Converter={StaticResource WeatherIconConverter}}"
                         HeightRequest="200"
                         WidthRequest="200"/>
 
                         <Label
-                        Text="{Binding CurrentWeather.Current.Temp, StringFormat='{0:F0}°C'}"
+                        Text="{Binding TestService.CurrentWeather.Current.Temp, StringFormat='{0:F0}°C'}"
                         FontSize="28"
                         FontAttributes="Bold"
                         TextColor="{StaticResource Light}"
                         HorizontalTextAlignment="Center"/>
 
                         <Label
-                        Text="{Binding CurrentWeather.Current.Condition.Text}"
+                        Text="{Binding TestService.CurrentWeather.Current.Condition.Text}"
                         HorizontalTextAlignment="Center"
                         FontSize="24"
                         TextColor="{StaticResource Light}"/>
@@ -65,34 +65,34 @@
                         <v:WeatherInfoView 
                         ImageSource="thermometer.png"
                         FrameTitle="Feelslike"
-                        Value="{Binding CurrentWeather.Current.Feelslike,
+                        Value="{Binding TestService.CurrentWeather.Current.Feelslike,
                             StringFormat='{0:F0}°C'}"/>
 
                         <v:WeatherInfoView
                         ImageSource="thermometer.png"
                         FrameTitle="Pressure"
-                        Value="{Binding CurrentWeather.Current.Pressure,
+                        Value="{Binding TestService.CurrentWeather.Current.Pressure,
                             Converter={StaticResource PressureConverter},
                             StringFormat='{0:F0}mmHg'}"/>
 
                         <v:WeatherInfoView
                         ImageSource="humidity.png"
                         FrameTitle="Humidity"
-                        Value="{Binding CurrentWeather.Current.Humidity,
+                        Value="{Binding TestService.CurrentWeather.Current.Humidity,
                             StringFormat='{0}%'}"/>
                         <v:WeatherInfoView
                         ImageSource="cloud.png"
                         FrameTitle="Cloud cover"
-                        Value="{Binding CurrentWeather.Current.Cloud,
+                        Value="{Binding TestService.CurrentWeather.Current.Cloud,
                             StringFormat='{0:F0}%'}"/>
                         <v:WeatherInfoView
                         ImageSource="windsock.png"
                         FrameTitle="Wind direction"
-                        Value="{Binding CurrentWeather.Current.WindDirection}"/>
+                        Value="{Binding TestService.CurrentWeather.Current.WindDirection}"/>
                         <v:WeatherInfoView
                         ImageSource="wind.png"
                         FrameTitle="Wind Speed"
-                        Value="{Binding CurrentWeather.Current.Wind,
+                        Value="{Binding TestService.CurrentWeather.Current.Wind,
                         StringFormat='{0:F1} km/h'}"/>
                     </FlexLayout>
                 </VerticalStackLayout>
@@ -113,7 +113,7 @@
                         Margin="0,20,0,0">
 
                         <CollectionView
-                            ItemsSource="{Binding Hours}">
+                            ItemsSource="{Binding TestService.Hours}">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout
                                     Orientation="Horizontal"
@@ -159,7 +159,7 @@
                         Margin="0,20,0,0">
 
                         <CollectionView
-                            ItemsSource="{Binding Days}">
+                            ItemsSource="{Binding TestService.Days}">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout
                                     Orientation="Horizontal"
