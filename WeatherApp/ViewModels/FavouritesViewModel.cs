@@ -45,7 +45,7 @@ public partial class FavouritesViewModel : ObservableObject
         {
             var weather = await _service.GetCurrentWeatherAsync(cityName);
 
-            _settings.Settings.FavouriteCities.Add(cityName);
+            _settings.Settings.FavouriteCities.Add(weather.Location.Name);
             FavouriteWeather.Add(weather);
             _settings.Save();
         }
@@ -63,10 +63,13 @@ public partial class FavouritesViewModel : ObservableObject
         _settings.Save();
     }
 
+
     private async Task AddCitiesWeather()
     {
         if (_settings.Settings.FavouriteCities.Count == 0) return;
-        // TODO : Fix this
+
+        FavouriteWeather.Clear();
+
         await foreach (var cityWeather in _service.GetCitiesWeatherAsync(_settings.Settings.FavouriteCities))
         {
             FavouriteWeather.Add(cityWeather);

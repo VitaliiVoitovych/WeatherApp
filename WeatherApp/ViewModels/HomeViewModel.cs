@@ -8,17 +8,17 @@ namespace WeatherApp.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
-    public CurrentWeatherService TestService { get; }
+    public CurrentWeatherService CurrentWeatherService { get; }
 
     public HomeViewModel(CurrentWeatherService testService)
     {
-        TestService = testService;
+        CurrentWeatherService = testService;
     }
 
     [RelayCommand]
     private async Task RefreshWeather()
     {
-        await TestService.RefreshWeather();
+        await CurrentWeatherService.RefreshWeather();
     }
 
 }

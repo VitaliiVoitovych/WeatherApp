@@ -64,7 +64,15 @@
                             Background="{StaticResource Secondary}"
                             CornerRadius="12"
                             Padding="15">
-
+                                <!-- Context menu for Windows (remove in future) -->
+                                <FlyoutBase.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem 
+                                            Text="Remove"
+                                            CommandParameter="{Binding .}"
+                                            Command="{Binding BindingContext.RemoveCommand, Source={x:Reference favouritePage}}"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.ContextFlyout>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer
                                     CommandParameter="{Binding .}"
