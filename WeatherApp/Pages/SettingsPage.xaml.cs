@@ -9,5 +9,12 @@ public partial class SettingsPage : ContentPage
 		InitializeComponent();
 
 		BindingContext = vm;
+
+		themeSwitch.IsToggled = App.Current.UserAppTheme == AppTheme.Dark;
 	}
+
+    private void Switch_Toggled(object sender, ToggledEventArgs e)
+    {
+		App.Current.UserAppTheme = e.Value ? AppTheme.Dark : AppTheme.Light;
+    }
 }

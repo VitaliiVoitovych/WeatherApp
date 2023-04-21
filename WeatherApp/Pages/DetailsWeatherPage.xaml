@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:WeatherApp.ViewModels"
              xmlns:v="clr-namespace:WeatherApp.Views"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="WeatherApp.Pages.DetailsWeatherPage"
              x:DataType="viewModel:DetailsWeatherViewModel"
              Shell.PresentationMode="{OnIdiom Desktop='Animated', Phone='ModalAnimated'}">
@@ -16,10 +17,13 @@
                 HeightRequest="36"
                 Margin="10,0,0,0"
                 IsVisible="{OnIdiom Desktop='False', Phone='True'}"
-                Command="{Binding GoToBackCommand}"/>
+                Command="{Binding GoToBackCommand}">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Dark}, Dark={StaticResource Light}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
             <Label
                 Text="{Binding CurrentWeather.Location.Name}"
-                TextColor="{StaticResource Light}"
                 FontSize="32"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
@@ -44,14 +48,12 @@
                         Text="{Binding CurrentWeather.Current.Temp, StringFormat='{0:F0}°C'}"
                         FontSize="28"
                         FontAttributes="Bold"
-                        TextColor="{StaticResource Light}"
                         HorizontalTextAlignment="Center"/>
 
                     <Label
                         Text="{Binding CurrentWeather.Current.Condition.Text}"
                         HorizontalTextAlignment="Center"
-                        FontSize="24"
-                        TextColor="{StaticResource Light}"/>
+                        FontSize="24"/>
 
                 </VerticalStackLayout>
 

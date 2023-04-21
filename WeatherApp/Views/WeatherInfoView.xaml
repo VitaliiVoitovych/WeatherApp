@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="WeatherApp.Views.WeatherInfoView"
              x:Name="this">
     <Border
-        BackgroundColor="{StaticResource Secondary}"
+        Background="{AppThemeBinding 
+            Light={StaticResource GrayBrush},
+            Dark={StaticResource SecondaryBrush}}"
         Padding="10"
         Margin="3"
         MinimumWidthRequest="175"
@@ -20,7 +23,11 @@
                     Source="{Binding ImageSource}"
                     WidthRequest="36"
                     HeightRequest="36"
-                    HorizontalOptions="Start"/>
+                    HorizontalOptions="Start">
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Dark}, Dark={StaticResource Light}}"/>
+                </Image.Behaviors>
+            </Image>
             <Label
                     Grid.Column="1"
                     Text="{Binding FrameTitle}"

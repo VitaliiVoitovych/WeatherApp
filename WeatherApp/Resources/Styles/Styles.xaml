@@ -15,7 +15,9 @@
     </Style>
     
     <Style TargetType="TabBar">
-        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Dark}"/>
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding
+            Light={StaticResource Light},
+            Dark={StaticResource Dark}}"/>
         <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource Accent}"/>
         <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource Accent}"/>
         <Setter Property="Shell.ForegroundColor" Value="{StaticResource Accent}"/>
@@ -23,11 +25,15 @@
     
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="Background" Value="{StaticResource DarkBrush}"/>
+        <Setter Property="Background" Value="{AppThemeBinding 
+            Light={StaticResource LightBrush},
+            Dark={StaticResource DarkBrush}}"/>
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource Light}"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding
+            Light={StaticResource Dark},
+            Dark={StaticResource Light}}"/>
         <Setter Property="FontSize" Value="15"/>
     </Style>
 
@@ -39,7 +45,9 @@
     </Style>
 
     <Style TargetType="Entry">
-        <Setter Property="TextColor" Value="{StaticResource Light}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding
+            Light={StaticResource Dark},
+            Dark={StaticResource Light}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14" />

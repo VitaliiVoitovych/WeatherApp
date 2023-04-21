@@ -14,6 +14,8 @@ namespace WeatherApp
 
             if (DeviceInfo.Idiom == DeviceIdiom.Phone)
                 CurrentItem = PhoneTabs;
+
+            App.Current.UserAppTheme = AppTheme.Dark;
         }
 
         private string selectedRoute;

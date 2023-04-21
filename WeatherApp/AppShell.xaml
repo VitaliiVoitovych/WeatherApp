@@ -17,7 +17,7 @@
                         <VisualStateGroup x:Name="CheckedStates">
                             <VisualState x:Name="Checked">
                                 <VisualState.Setters>
-                                    <Setter TargetName="OuterBorder" Property="Background" Value="{StaticResource DarkBrush}" />
+                                    <Setter TargetName="OuterBorder" Property="Background" Value="{AppThemeBinding Light={StaticResource LightBrush}, Dark={StaticResource DarkBrush}}" />
                                 </VisualState.Setters>
                             </VisualState>
 
@@ -57,7 +57,9 @@
     <Shell.FlyoutContentTemplate>
         <DataTemplate>
             <Grid
-                Background="{StaticResource Secondary}"
+                Background="{AppThemeBinding 
+                    Light={StaticResource GrayBrush},
+                    Dark={StaticResource SecondaryBrush}}"
                 RowDefinitions="*,*,*,*,*,*,*,*"
                 RadioButtonGroup.GroupName="Menu"
                 RadioButtonGroup.SelectedValue="{Binding SelectedRoute}">

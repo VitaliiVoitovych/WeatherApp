@@ -17,10 +17,13 @@
                 WidthRequest="36"
                 HeightRequest="36"
                 Margin="0,0,10,0"
-                Command="{Binding RefreshWeatherCommand}"/>
+                Command="{Binding RefreshWeatherCommand}">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Dark}, Dark={StaticResource Light}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
             <Label
                 Text="{Binding CurrentWeatherService.CurrentWeather.Location.Name}"
-                TextColor="{StaticResource Light}"
                 FontSize="32"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
@@ -44,14 +47,12 @@
                         Text="{Binding CurrentWeatherService.CurrentWeather.Current.Temp, StringFormat='{0:F0}°C'}"
                         FontSize="28"
                         FontAttributes="Bold"
-                        TextColor="{StaticResource Light}"
                         HorizontalTextAlignment="Center"/>
 
                         <Label
                         Text="{Binding CurrentWeatherService.CurrentWeather.Current.Condition.Text}"
                         HorizontalTextAlignment="Center"
-                        FontSize="24"
-                        TextColor="{StaticResource Light}"/>
+                        FontSize="24"/>
 
                     </VerticalStackLayout>
 
@@ -108,43 +109,49 @@
                         TextColor="{StaticResource Accent}"
                         Margin="0,12,0,0"/>
 
-                    <ScrollView
-                        Orientation="Horizontal"
-                        Margin="0,20,0,0">
+                    <Border
+                        Background="{AppThemeBinding
+                        Light={StaticResource GrayBrush},
+                        Dark={StaticResource SecondaryBrush}}"
+                        Padding="5">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12"/>
+                        </Border.StrokeShape>
+                        <ScrollView
+                        Orientation="Horizontal">
 
-                        <CollectionView
+                            <CollectionView
                             ItemsSource="{Binding CurrentWeatherService.Hours}">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout
                                     Orientation="Horizontal"
                                     ItemSpacing="20"/>
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="models:Hour">
-                                    <VerticalStackLayout
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Hour">
+                                        <VerticalStackLayout
                                         HorizontalOptions="Center"
                                         Margin="0,0,0,15">
 
-                                        <Label
+                                            <Label
                                             Text="{Binding Time, StringFormat='{0:HH:mm}'}"
-                                            TextColor="{StaticResource Light}"
                                             HorizontalTextAlignment="Center"/>
 
-                                        <Image
+                                            <Image
                                             Source="{Binding ., 
                                                 Converter={StaticResource WeatherIconConverter}}"
                                             WidthRequest="48"
                                             HeightRequest="48"/>
 
-                                        <Label 
+                                            <Label 
                                             Text="{Binding Temp, StringFormat='{0:F0}°C'}"
-                                            TextColor="{StaticResource Light}"
                                             HorizontalTextAlignment="Center"/>
-                                    </VerticalStackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </ScrollView>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </ScrollView>
+                    </Border>
 
                     <!-- Daily forecast -->
                     <Label
@@ -168,7 +175,9 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="models:ForecastDay">
                                     <Frame
-                                        Background="{StaticResource SecondaryBrush}"
+                                        Background="{AppThemeBinding 
+                                            Light={StaticResource GrayBrush},
+                                            Dark={StaticResource SecondaryBrush}}"
                                         CornerRadius="12"
                                         Padding="15"
                                         Margin="0,0,0,15"

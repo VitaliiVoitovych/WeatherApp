@@ -8,10 +8,11 @@
     <Color x:Key="Accent">#8EBBFF</Color>
     <Color x:Key="Light">#F4F5FC</Color>
     <Color x:Key="Secondary">#2F3855</Color>
+    <Color x:Key="Gray">#e2e3ec</Color>
     
     <SolidColorBrush x:Key="DarkBrush" Color="{StaticResource Dark}"/>
     <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}"/>
     <SolidColorBrush x:Key="LightBrush" Color="{StaticResource Light}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
-
+    <SolidColorBrush x:Key="GrayBrush" Color="{StaticResource Gray}"/>
 </ResourceDictionary>
