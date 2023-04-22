@@ -3,7 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherApp.Pages.SettingsPage">
     <VerticalStackLayout>
-        <HorizontalStackLayout HorizontalOptions="Center">
+        <HorizontalStackLayout 
+            HorizontalOptions="Center"
+            Margin="0,15,0,0"
+            BackgroundColor="{AppThemeBinding
+                Light={StaticResource Gray}}">
             <Label
                 Text="Dark Mode"
                 VerticalOptions="Center"/>

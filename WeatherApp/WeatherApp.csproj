@@ -20,7 +20,7 @@
 		<ApplicationIdGuid>3bac5199-76bd-46e3-acc6-f0b55378267b</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>0.5</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>0.5.1</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -60,7 +60,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\cloud.svg" />
-	  <None Remove="Resources\Images\cross.svg" />
+	  <None Remove="Resources\Images\cross_light.svg" />
 	  <None Remove="Resources\Images\heart.svg" />
 	  <None Remove="Resources\Images\home.svg" />
 	  <None Remove="Resources\Images\humidity.svg" />

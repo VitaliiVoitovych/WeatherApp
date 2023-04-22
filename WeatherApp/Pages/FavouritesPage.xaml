@@ -55,7 +55,9 @@
                         <SwipeView>
                             <SwipeView.RightItems>
                                 <SwipeItem
-                                    IconImageSource="cross.png"
+                                    IconImageSource="{AppThemeBinding
+                                        Light=cross_dark.png,
+                                    Dark=cross_light.png}"
                                     BackgroundColor="Transparent" 
                                     CommandParameter="{Binding .}"
                                     Command="{Binding BindingContext.RemoveCommand, Source={x:Reference favouritePage}}"/>
