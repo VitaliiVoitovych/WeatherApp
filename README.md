@@ -3,6 +3,10 @@
 Using .NET MAUI and https://www.weatherapi.com/
 
 ## Some photo with app
+Platform
+* Windows
+* Android
+
 ### Windows
 
 ![alt](https://github.com/VitaliiVoit/WeatherApp/blob/master/images/windows/home-page.png)
